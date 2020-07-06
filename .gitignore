@@ -1,0 +1,8 @@
+*.xpm
+*.o
+*.a
+*.swp
+*.dylib
+*.cub
+cub3d
+mini*/*
