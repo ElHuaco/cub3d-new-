@@ -5,3 +5,5 @@
 *.dylib
 *.cub
 cub3d
+.swiftmodule
+.swiftdoc
