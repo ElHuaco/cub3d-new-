@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:44 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/06 12:35:02 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/07 13:27:20 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,10 @@ int			is_map_values_topoerr(char **val, int i, int j, int arr_size)
 		return (1);
 	else
 		return (0);
+}
+
+void		error_exit(char *errstr)
+{
+	ft_printf("Error\n%s", errstr);
+	exit(1);
 }

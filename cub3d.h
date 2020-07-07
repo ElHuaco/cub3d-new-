@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/06 12:31:25 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/07 13:30:11 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # include <fcntl.h>
 
 # define READ_SIZE 50
-# define FOV 1.427996
+# define CAM_VEL 0.5
+# define ROT_ANGLE 0.05
 # define UP 126
 # define DOWN 125
 # define RIGHT 124
@@ -62,7 +63,7 @@ typedef struct		s_maps
 	int				res_width;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
-	int				*wall_linelength;
+	int				*wall_lineheight;
 	int				*wall_start;
 	int				sprite_num;
 	t_sprites		*sprites;
@@ -79,6 +80,11 @@ typedef struct		s_vars
 	double			posY;
 	double			planeX;
 	double			planeY;
+	double			rayX;
+	double			rayY;
+	double			texpos;
+	double			step;
+	int				texY;
 	char			side;
 	double			*ray_hit;
 	double			*ray_distance;
@@ -105,7 +111,6 @@ int					ray_caster(t_vars *var);
 */
 int					camera_update(int keycode, t_vars *var);
 int					x_close(t_vars *var);
-void				error_exit(char *errstr);
 /*
 **		pixel_handling
 */
@@ -113,7 +118,7 @@ void				put_pixel_wall_texture(t_imgs *im, int i, int j, t_vars *v);
 void				put_pixel_ceilflo(t_imgs *im, int i, int j, unsigned int c);
 void				set_pixel_limits(t_vars *var, double *len);
 /*
-**		parse_set_params_utils
+**		parse_cube_files_utils
 */
 int					set_initial_camera_pos(t_vars *v, t_maps *m, int i, int j);
 int					set_floor_ceil_color(t_maps *map, char *buff, int i);
@@ -126,6 +131,7 @@ int					set_texture_paths(t_maps *map, char *buff, int i);
 char				**map_to_rectangle_by_sp(char **buff);
 int					is_map_values_topoerr(char **val, int i, int j, int as);
 int					is_cub_file_chr(int c);
+void				error_exit(char *errstr);
 /*
 **		save_utils
 */
