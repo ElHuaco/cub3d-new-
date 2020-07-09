@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 12:13:37 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 12:32:49 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,6 @@ void		sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img)
 	}
 	mlx_put_image_to_window(var->mlx, var->win, img[0].img, 0, 0);
 	if (var->must_save == 1)
-		save_img(var, img[0].img);
+		screenshot(var, img[0]);
 }
 

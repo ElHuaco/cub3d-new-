@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 11:38:34 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 12:35:26 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define A 0
 # define D 2
 # define EOPEN "Error opening file\n"
+# define EWR "Error writing file\n"
 # define EPLAPOS "Starting position count not 1\n"
 # define ENONCHR "Found symbol outside cub file standard\n"
 # define ENOTCLO "Map not enclosed by walls\n"
@@ -138,9 +139,9 @@ int					is_map_values_topoerr(char **val, int i, int j, int as);
 int					is_cub_file_chr(int c);
 void				error_exit(char *errstr);
 /*
-**		save_utils
+**		screenshot_first_frame
 */
-void				save_img(t_vars *var, void *img);
+void				screenshot(t_vars *var, t_imgs img);
 /*
 **		sprite_caster
 */
