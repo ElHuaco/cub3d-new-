@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/07 13:30:11 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:20:41 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <fcntl.h>
 
 # define READ_SIZE 50
-# define CAM_VEL 0.5
-# define ROT_ANGLE 0.05
+# define CAM_VEL 0.1
+# define ROT_VEL 0.01
 # define UP 126
 # define DOWN 125
 # define RIGHT 124
@@ -82,12 +82,12 @@ typedef struct		s_vars
 	double			planeY;
 	double			rayX;
 	double			rayY;
-	double			texpos;
-	double			step;
-	int				texY;
 	char			side;
 	double			*ray_hit;
 	double			*ray_distance;
+	double			Lmove;
+	double			Pmove;
+	double			rot;
 	int				must_save;
 }					t_vars;
 
@@ -109,14 +109,19 @@ int					ray_caster(t_vars *var);
 /*
 **		hooks
 */
-int					camera_update(int keycode, t_vars *var);
+int					camera_update(t_vars *var);
+/*
+**		hooks_utils
+*/
+int					press_update(int keycode, t_vars *var);
+int					release_update(int keycode, t_vars *var);
 int					x_close(t_vars *var);
 /*
 **		pixel_handling
 */
 void				put_pixel_wall_texture(t_imgs *im, int i, int j, t_vars *v);
 void				put_pixel_ceilflo(t_imgs *im, int i, int j, unsigned int c);
-void				set_pixel_limits(t_vars *var, double *len);
+void				set_pixel_limits(t_vars *var, double *len, int col);
 /*
 **		parse_cube_files_utils
 */
@@ -139,7 +144,7 @@ void				save_img(t_vars *var, void *img);
 /*
 **		sprite_caster
 */
-void				sprite_caster(t_vars *var, t_imgs *img);
+void				sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img);
 /*
 **		sprite_calc_utils
 */

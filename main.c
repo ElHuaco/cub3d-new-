@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 12:52:52 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/06 12:22:02 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 10:31:02 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static void		parse_map_values(t_vars *var, t_maps *map, char *buff)
 {
 	int		i;
 	int		j;
-	int		pla_pos_count;
+	int		init_cam_count;
 	char	**vals_without_sp_squaring;
 
-	pla_pos_count = 0;
+	init_cam_count = 0;
 	vals_without_sp_squaring = ft_split(buff, '\n');
 	map->val = map_to_rectangle_by_sp(vals_without_sp_squaring);
 	map->height = ft_arrlen(map->val);
@@ -64,10 +64,10 @@ static void		parse_map_values(t_vars *var, t_maps *map, char *buff)
 				error_exit(ENONCHR);
 			if (is_map_values_topoerr(map->val, i, j, map->height - 1))
 				error_exit(ENOTCLO);
-			pla_pos_count += set_initial_camera_pos(var, map, i, j);
+			init_cam_count += set_initial_camera_pos(var, map, i, j);
 		}
 	}
-	if ((pla_pos_count > 1) || (pla_pos_count == 0))
+	if ((init_cam_count > 1) || (init_cam_count == 0))
 		error_exit(EPLAPOS);
 }
 
@@ -116,9 +116,11 @@ int				main(int argc, char **argv)
 		var.map->res_width, var.map->res_height, "cub3d");
 	if (!var.win)
 		error_exit(EWIN);
-	mlx_hook(var.win, 1, 0, ray_caster, &var);
-	mlx_hook(var.win, 2, 1L << 1, camera_update, &var);
+	mlx_hook(var.win, 2, 1, press_update, &var);
+	mlx_hook(var.win, 3, 1, release_update, &var);
 	mlx_hook(var.win, 17, 0, x_close, &var);
+	mlx_do_key_autorepeaton(var.mlx);
+	mlx_loop_hook(var.mlx, ray_caster, &var);
 	mlx_loop(var.mlx);
 	return (0);
 }

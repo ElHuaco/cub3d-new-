@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 11:26:32 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/07 13:00:05 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 10:33:20 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,13 @@ int				ray_caster(t_vars *var)
 
 	set_mlx_texture_imgs(var, img);
 	malloc_or_free_caster_params(var, img, "malloc");
+	camera_update(var);
 	i = -1;
 	while (++i < var->map->res_width)
 	{
 		len[0] = ray_distance(var, i);
 		var->ray_distance[i] = len[0];
-		set_pixel_limits(var, len);
-		var->map->wall_lineheight[i] = (int)(var->map->res_height / len[0]);
-		var->map->wall_start[i] = len[2];
+		set_pixel_limits(var, len, i);
 		j = -1;
 		while (++j < (int)len[2])
 			put_pixel_ceilflo(img, i, j, var->map->ceiling_color);
@@ -134,7 +133,7 @@ int				ray_caster(t_vars *var)
 		while (j < var->map->res_height - 1)
 			put_pixel_ceilflo(img, i, j++, var->map->floor_color);
 	}
-	sprite_caster(var, img);
+	sprite_caster_and_frame_to_win(var, img);
 	malloc_or_free_caster_params(var, img, "free");
 	return (0);
 }

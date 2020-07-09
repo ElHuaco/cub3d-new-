@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/07 12:40:36 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:07:22 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int			set_initial_camera_pos(t_vars *var, t_maps *map, int i, int j)
 		var->planeY = 0.66 * (c == 'N') - 0.66 * (c == 'S')
 			+ 0.0 * ((c == 'W') || (c == 'E'));
 		map->val[i][j] = '0';
+		var->rot = 0;
+		var->Pmove = 0;
+		var->Lmove = 0;
 		return (1);
 	}
 	else
