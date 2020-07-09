@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 12:52:52 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 10:31:02 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:10:04 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ static int		parse_map_params(t_maps *map, char *buff)
 			error_exit(EINFO);
 	}
 	while (buff[i++] == '\n')
-	{
-	}
+		;
 	return (i - 1);
 }
 

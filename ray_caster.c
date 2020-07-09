@@ -6,13 +6,13 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 11:26:32 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 10:33:20 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:18:09 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cast_till_wall(t_vars *var, int *cell, double *dist)
+static void	cast_till_wall(t_vars *var, int *cell, double *dist)
 {
 	while (var->map->val[cell[1]][cell[0]] != '1')
 	{
@@ -31,7 +31,7 @@ static void		cast_till_wall(t_vars *var, int *cell, double *dist)
 	}
 }
 
-static void		set_initial_steps(t_vars *v, double *d, int *m)
+static void	set_initial_steps(t_vars *v, double *d, int *m)
 {
 	if (v->rayX < 0)
 	{
@@ -70,32 +70,32 @@ static double	ray_distance(t_vars *var, int col)
 	dist[1] = fabs(1 / var->rayY);
 	set_initial_steps(var, dist, map_cell);
 	cast_till_wall(var, map_cell, dist);
-	if ((var->side == 'w') || (var->side == 'e')) 
+	if ((var->side == 'w') || (var->side == 'e'))
 	{
 		dist[4] = (map_cell[0] - var->posX + (1 - dist[5]) / 2) / var->rayX;
 		var->ray_hit[col] = var->posY + dist[4] * var->rayY;
 	}
 	else
 	{
-		dist[4] = (map_cell[1] - var->posY + (1 - dist[6]) / 2 ) / var->rayY;
+		dist[4] = (map_cell[1] - var->posY + (1 - dist[6]) / 2) / var->rayY;
 		var->ray_hit[col] = var->posX + dist[4] * var->rayX;
 	}
 	var->ray_hit[col] -= floor(var->ray_hit[col]);
 	return (dist[4]);
 }
 
-static void		malloc_or_free_caster_params(t_vars *var, t_imgs *img, char *command)
+static void	malloc_or_free_caster_params(t_vars *var, t_imgs *img, char *str)
 {
 	int i;
 
-	if (!(ft_strcmp(command, "malloc")))
+	if (!(ft_strcmp(str, "malloc")))
 	{
 		var->ray_hit = malloc(sizeof(double) * var->map->res_width);
 		var->map->wall_lineheight = malloc(sizeof(int) * var->map->res_width);
 		var->map->wall_start = malloc(sizeof(int) * var->map->res_width);
 		var->ray_distance = malloc(sizeof(double) * var->map->res_width);
 	}
-	else if (!(ft_strcmp(command, "free")))
+	else if (!(ft_strcmp(str, "free")))
 	{
 		i = -1;
 		while (++i < 6)
@@ -109,7 +109,7 @@ static void		malloc_or_free_caster_params(t_vars *var, t_imgs *img, char *comman
 		error_exit("BAD CODE\n");
 }
 
-int				ray_caster(t_vars *var)
+int		ray_caster(t_vars *var)
 {
 	int		i;
 	int		j;

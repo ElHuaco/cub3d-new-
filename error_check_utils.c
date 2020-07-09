@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:44 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/07 13:27:20 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 19:47:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,27 @@ char		**map_to_rectangle_by_sp(char **val)
 
 int			is_map_values_topoerr(char **val, int i, int j, int arr_size)
 {
-	int			len;
-	int			k;
-	int			l;
+	int			k[3];
 
-	len = ft_strlen(val[i]) - 1;
-	k = -1;
-	while (val[i][++k] == ' ')
-	{
-	}
-	l = len + 1;
+	k[0] = ft_strlen(val[i]) - 1;
+	k[1] = -1;
+	while (val[i][++k[1]] == ' ')
+		;
+	k[2] = k[0] + 1;
 	while (val[i][--l] == ' ')
-	{
-	}
-	if ((val[i][k] != '1') || (val[i][l] != '1'))
+		;
+	if ((vakl[i][k[1]] != '1') || (val[i][l] != '1'))
 		return (1);
 	else if ((!i || (i == arr_size))
 		&& ((val[i][j] != '1') && (val[i][j] != ' ')))
 		return (1);
 	else if ((((i != 0) && (val[i - 1][j] == ' '))
 		|| (((i != 0) && (j != 0)) && (val[i - 1][j - 1] == ' '))
-		|| (((i != 0) && (j != len)) && (val[i - 1][j + 1] == ' '))
+		|| (((i != 0) && (j != k[0])) && (val[i - 1][j + 1] == ' '))
 		|| ((j != 0) && (val[i][j - 1] == ' '))
-		|| ((j != len) && (val[i][j + 1] == ' '))
+		|| ((j != k[0]) && (val[i][j + 1] == ' '))
 		|| ((i != arr_size) && (val[i + 1][j] == ' '))
-		|| (((i != arr_size) && (j != len)) && (val[i + 1][j + 1] == ' '))
+		|| (((i != arr_size) && (j != k[0])) && (val[i + 1][j + 1] == ' '))
 		|| (((i != arr_size) && (j != 0)) && (val[i + 1][j - 1] == ' ')))
 		&& ((val[i][j] != '1') && (val[i][j] != ' ')))
 		return (1);

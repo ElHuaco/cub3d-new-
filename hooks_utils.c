@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 10:56:00 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 11:37:25 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:09:31 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			press_update(int key, t_vars *var)
 
 int			release_update(int key, t_vars *var)
 {
-	 if (key == W || key == UP || key == D || key == DOWN)
+	if (key == W || key == UP || key == D || key == DOWN)
 		var->Pmove = 0;
 	else if (key == A || key == D)
 		var->Lmove = 0;

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 12:29:21 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 12:58:25 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:18:49 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int		write_bmp_header(int fd, t_vars *var)
 	hex = 0x00000036;
 	write(fd, &hex, 4);
 	write_dib_header(fd, hex, var);
-	return(1);
+	return (1);
 }
 
 static int		write_bmp_data(int fd, t_vars *var, t_imgs img)

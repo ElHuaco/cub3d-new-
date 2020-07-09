@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 12:32:49 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:19:54 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	sort_sprites_by_distance(t_vars *var)
 		{
 			if ((var->map->sprites[j].dist > var->map->sprites[i].dist)
 				&& (j > i))
-			{ 
+			{
 				temp = duplicate_sprite(var->map->sprites[i]);
 				replace_sprite(var->map->sprites + i,
 					var->map->sprites + j);
@@ -95,7 +95,7 @@ static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *i)
 	while (++c < l[1] - 1)
 	{
 		s[0] = (c - l[0]) * i[5].img_w * fabs(p[1] / v->map->res_height);
-	 	if ((p[1] > 0) && (c > 0) && (c < v->map->res_width)
+		if ((p[1] > 0) && (c > 0) && (c < v->map->res_width)
 				&& (p[1] < v->ray_distance[c]))
 		{
 			r = l[2] - 1;
@@ -141,4 +141,3 @@ void		sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img)
 	if (var->must_save == 1)
 		screenshot(var, img[0]);
 }
-

@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_set_params_utils.c                           :+:      :+:    :+:   */
+/*   parse_cub_file_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 12:24:49 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:12:56 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
 int			set_initial_camera_pos(t_vars *var, t_maps *map, int i, int j)
 {
-	char	c;
+	char c;
 
 	c = map->val[i][j];
 	if ((c == 'W') || (c == 'E') || (c == 'N') || (c == 'S')
@@ -49,19 +48,16 @@ int			set_floor_ceil_color(t_maps *map, char *buff, int i)
 
 	ceil_or_floor = (buff[i] == 'F') ? 0 : 1;
 	while (buff[++i] == ' ')
-	{
-	}
+		;
 	r = ft_atoi(buff + i) * 65536;
 	j = -1;
 	while (ft_isdigit(buff[i + ++j]))
-	{
-	}
+		;
 	i += j + 1;
 	g = ft_atoi(buff + i) * 256;
 	j = -1;
 	while (ft_isdigit(buff[i + ++j]))
-	{
-	}
+		;
 	i += j + 1;
 	b = ft_atoi(buff + i);
 	if ((r < 0) || (g < 0) || (b < 0))
@@ -78,21 +74,17 @@ int			set_window_resolution(t_maps *map, char *buff, int i)
 	int		j;
 
 	while (buff[++i] == ' ')
-	{
-	}
+		;
 	j = -1;
 	while (ft_isdigit(buff[i + ++j]))
-	{
-	}
+		;
 	map->res_width = ft_atoi(buff + i);
 	i += j - 1;
 	while (buff[++i] == ' ')
-	{
-	}
+		;
 	j = -1;
 	while (ft_isdigit(buff[i + ++j]))
-	{
-	}
+		;
 	map->res_height = ft_atoi(buff + i);
 	if ((map->res_width <= 0) || (map->res_height <= 0))
 		error_exit(EINFO);
@@ -109,14 +101,12 @@ int			set_texture_paths(t_maps *map, char *buff, int i)
 	j = i;
 	i++;
 	while (buff[++i] == ' ')
-	{
-	}
+		;
 	k = i;
 	if ((buff[i] != '.') || (buff[i + 1] != '/'))
 		error_exit(EINFO);
 	while (buff[i++] != '\n')
-	{
-	}
+		;
 	buff[i - 1] = 0;
 	if (buff[j] == 'N')
 		map->north = ft_strdup(buff + k);

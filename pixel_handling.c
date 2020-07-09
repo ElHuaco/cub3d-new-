@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 11:25:39 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 10:22:01 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:14:01 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	put_pixel_wall_texture(t_imgs *img, int i, int j, t_vars *var)
 
 	side = 1 * (var->side == 'n') + 2 * (var->side == 's')
 		+ 3 * (var->side == 'w') + 4 * (var->side == 'e');
-		
 	if ((side == 2) || (side == 4))
 		corresp_tex_coord[0] = img[side].img_w * (1.0 - var->ray_hit[i]);
 	else
@@ -53,5 +52,3 @@ void	set_pixel_limits(t_vars *var, double *len, int col)
 	if (len[1] >= var->map->res_height)
 		len[1] = var->map->res_height - 1;
 }
-
-
