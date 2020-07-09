@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 11:20:41 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:38:34 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <fcntl.h>
 
 # define READ_SIZE 50
-# define CAM_VEL 0.1
-# define ROT_VEL 0.01
+# define CAM_VEL 0.15
+# define ROT_VEL 0.03
 # define UP 126
 # define DOWN 125
 # define RIGHT 124

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 19:22:53 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 11:27:38 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:34:30 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ static void	ft_double_collision(t_vars *var)
 
 int		camera_update(t_vars *var)
 {
-	if ((var->rot != 0) || (var->Pmove != 0) || (var->Lmove != 0))
+//	if ((var->rot != 0) || (var->Pmove != 0) || (var->Lmove != 0))
 //	printf("camera update variables status\n(rot, P, L): (%f, %f, %f)\n", var->rot, var->Pmove, var->Lmove);
-	if (var->rot != 0)
-		camera_rotation(var, var->rot);
 	if (!var->Pmove || !var->Lmove)
 	{
 		if (var->map->val[(int)(var->posY)]
@@ -60,6 +58,8 @@ int		camera_update(t_vars *var)
 	}
 	else
 		ft_double_collision(var);
+	if (var->rot != 0)
+		camera_rotation(var, var->rot);
 	return (0);
 }
 

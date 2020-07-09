@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 10:56:00 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 10:56:45 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:37:25 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			press_update(int key, t_vars *var)
 		x_close(var);
 	else if (key == W || key == UP)
 		var->Pmove = CAM_VEL;
-	else if (key == D || key == DOWN)
+	else if (key == S || key == DOWN)
 		var->Pmove = -1 * CAM_VEL;
 	else if (key == A)
 		var->Lmove = 0.5 * CAM_VEL;

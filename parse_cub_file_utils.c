@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 11:07:22 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/09 12:24:49 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,10 @@ int			set_window_resolution(t_maps *map, char *buff, int i)
 	{
 	}
 	map->res_height = ft_atoi(buff + i);
-	if ((map->res_width <= 0) || (map->res_height <= 0)
-		|| (map->res_width >= 2575) || (map->res_height >= 1440))
+	if ((map->res_width <= 0) || (map->res_height <= 0))
 		error_exit(EINFO);
+	map->res_width *= (map->res_width > 2575) ? 2575 / map->res_width : 1;
+	map->res_height *= (map->res_height > 1440) ? 1440 / map->res_height : 1;
 	return (i + j);
 }
 
@@ -104,7 +105,7 @@ int			set_texture_paths(t_maps *map, char *buff, int i)
 {
 	int		j;
 	int		k;
-//aqui quiza permitir paths distintos de ./blablabla
+
 	j = i;
 	i++;
 	while (buff[++i] == ' ')
