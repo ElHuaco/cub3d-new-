@@ -133,7 +133,7 @@ void		sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img)
 			+ var->planeX * var->map->sprites[i].y) * len[4];
 		if (fabs(proyect[1]) > 10e-7)
 		{
-			calc_sprite_bounds(var, len, proyect);
+			set_sprite_limits(var, len, proyect);
 			put_sprite_img(var, len, proyect, img);
 		}
 	}
