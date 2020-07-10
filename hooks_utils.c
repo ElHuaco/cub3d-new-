@@ -33,7 +33,7 @@ int			press_update(int key, t_vars *var)
 
 int			release_update(int key, t_vars *var)
 {
-	if (key == W || key == UP || key == D || key == DOWN)
+	if (key == W || key == UP || key == S || key == DOWN)
 		var->Pmove = 0;
 	else if (key == A || key == D)
 		var->Lmove = 0;
