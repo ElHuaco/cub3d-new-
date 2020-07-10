@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void		calc_sprite_bounds(t_vars *var, int *len, double *proyect)
+void		set_sprite_limits(t_vars *var, int *len, double *proyect)
 {
 	double		scaling;
 
