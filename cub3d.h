@@ -124,7 +124,7 @@ void				put_pixel_wall_texture(t_imgs *im, int i, int j, t_vars *v);
 void				put_pixel_ceilflo(t_imgs *im, int i, int j, unsigned int c);
 void				set_pixel_limits(t_vars *var, double *len, int col);
 /*
-**		parse_cube_files_utils
+**		parse_cube_file_utils
 */
 int					set_initial_camera_pos(t_vars *v, t_maps *m, int i, int j);
 int					set_floor_ceil_color(t_maps *map, char *buff, int i);
