@@ -108,11 +108,11 @@ typedef struct		s_img
 */
 int					ray_caster(t_vars *var);
 /*
-**		hooks
+**		camera_update
 */
 int					camera_update(t_vars *var);
 /*
-**		hooks_utils
+**		hooks
 */
 int					press_update(int keycode, t_vars *var);
 int					release_update(int keycode, t_vars *var);
@@ -149,7 +149,7 @@ void				sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img);
 /*
 **		sprite_calc_utils
 */
-void				calc_sprite_bounds(t_vars *v, int *len, double *pro);
+void				set_sprite_limits(t_vars *v, int *len, double *pro);
 t_sprites			duplicate_sprite(t_sprites src);
 void				replace_sprite(t_sprites *dst, t_sprites *src);
 #endif
