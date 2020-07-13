@@ -6,13 +6,13 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 19:22:53 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 20:08:10 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:01:31 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	camera_rotation(t_vars *var, double angle)
+static void		camera_rotation(t_vars *var, double angle)
 {
 	double temp;
 
@@ -24,7 +24,7 @@ static void	camera_rotation(t_vars *var, double angle)
 	var->planeY = temp * sin(angle) + var->planeY * cos(angle);
 }
 
-static void	both_move(t_vars *var)
+static void		both_move(t_vars *var)
 {
 	if (var->map->val[(int)var->posY]
 		[(int)(var->posX + (var->dirX * var->Pmove
@@ -38,7 +38,7 @@ static void	both_move(t_vars *var)
 			var->dirX * var->Lmove) * 0.7;
 }
 
-int		camera_update(t_vars *var)
+int				camera_update(t_vars *var)
 {
 	if (!var->Pmove || !var->Lmove)
 	{

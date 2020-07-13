@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 12:29:21 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 11:35:55 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 11:42:39 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ static int		write_bmp_data(int fd, t_vars *var, t_imgs img)
 		col = -1;
 		while (++col < var->map->res_width)
 		{
-			//printf("bytes per pixel: %d\n", img.bpp / 8);
-			//printf("pixel %d %d asignado\n", row, col);
-			color = *(unsigned int *)(img.addr + (var->map->res_height - 1 - row)
+			color = *(unsigned int *)(img.addr
+				+ (var->map->res_height - 1 - row)
 				* img.ll + col * (img.bpp / 8));
 			if (write(fd, &color, 4) < 0)
 				return (0);

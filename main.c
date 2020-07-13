@@ -6,20 +6,25 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 12:52:52 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 20:10:04 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 11:55:04 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		parse_map_params(t_maps *map, char *buff)
+static void		set_map_params_to_zero(t_maps *map)
 {
-	int		i;
-
 	map->res_width = 0;
 	map->res_height = 0;
 	map->ceiling_color = 0;
 	map->floor_color = 0;
+}
+
+static int		parse_map_params(t_maps *map, char *buff)
+{
+	int		i;
+
+	set_map_params_to_zero(map);
 	i = 0;
 	while (!(map->north) || !(map->south) || !(map->west) || !(map->east)
 		|| !(map->sprite) || !(map->res_width) || !(map->res_height)

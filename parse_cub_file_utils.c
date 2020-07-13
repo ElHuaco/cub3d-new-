@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 20:12:56 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:02:44 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,29 @@ int			set_floor_ceil_color(t_maps *map, char *buff, int i)
 {
 	int		j;
 	int		ceil_or_floor;
-	int		r;
-	int		g;
-	int		b;
+	int		color[3];
 
 	ceil_or_floor = (buff[i] == 'F') ? 0 : 1;
 	while (buff[++i] == ' ')
 		;
-	r = ft_atoi(buff + i) * 65536;
+	color[0] = ft_atoi(buff + i) * 65536;
 	j = -1;
 	while (ft_isdigit(buff[i + ++j]))
 		;
 	i += j + 1;
-	g = ft_atoi(buff + i) * 256;
+	color[1] = ft_atoi(buff + i) * 256;
 	j = -1;
 	while (ft_isdigit(buff[i + ++j]))
 		;
 	i += j + 1;
-	b = ft_atoi(buff + i);
-	if ((r < 0) || (g < 0) || (b < 0))
+	color[2] = ft_atoi(buff + i);
+	if ((color[0] < 0) || (color[1] < 0) || (color[2] < 0))
 		error_exit(EINFO);
 	if (!ceil_or_floor)
-		map->floor_color = r + g + b;
+		map->floor_color = color[0] + color[1] + color[2];
 	else
-		map->ceiling_color = r + g + b;
-	return (i + digit_number(b, 10));
+		map->ceiling_color = color[0] + color[1] + color[2];
+	return (i + digit_number(color[2], 10));
 }
 
 int			set_window_resolution(t_maps *map, char *buff, int i)
@@ -88,8 +86,8 @@ int			set_window_resolution(t_maps *map, char *buff, int i)
 	map->res_height = ft_atoi(buff + i);
 	if ((map->res_width <= 0) || (map->res_height <= 0))
 		error_exit(EINFO);
-	map->res_width *= (map->res_width > 2575) ? 2575 / map->res_width : 1;
-	map->res_height *= (map->res_height > 1440) ? 1440 / map->res_height : 1;
+	map->res_width = (map->res_width > 2575) ? 2575 : map->res_width;
+	map->res_height = (map->res_height > 1440) ? 1440 : map->res_height;
 	return (i + j);
 }
 

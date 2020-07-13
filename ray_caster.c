@@ -6,13 +6,13 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 11:26:32 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 20:18:09 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 11:44:59 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	cast_till_wall(t_vars *var, int *cell, double *dist)
+static void		cast_till_wall(t_vars *var, int *cell, double *dist)
 {
 	while (var->map->val[cell[1]][cell[0]] != '1')
 	{
@@ -31,7 +31,7 @@ static void	cast_till_wall(t_vars *var, int *cell, double *dist)
 	}
 }
 
-static void	set_initial_steps(t_vars *v, double *d, int *m)
+static void		set_initial_steps(t_vars *v, double *d, int *m)
 {
 	if (v->rayX < 0)
 	{
@@ -84,7 +84,7 @@ static double	ray_distance(t_vars *var, int col)
 	return (dist[4]);
 }
 
-static void	malloc_or_free_caster_params(t_vars *var, t_imgs *img, char *str)
+static void		malloc_or_free_caster_param(t_vars *var, t_imgs *im, char *str)
 {
 	int i;
 
@@ -99,7 +99,7 @@ static void	malloc_or_free_caster_params(t_vars *var, t_imgs *img, char *str)
 	{
 		i = -1;
 		while (++i < 6)
-			mlx_destroy_image(var->win, img[i].img);
+			mlx_destroy_image(var->win, im[i].img);
 		free(var->ray_hit);
 		free(var->map->wall_start);
 		free(var->map->wall_lineheight);
@@ -109,7 +109,7 @@ static void	malloc_or_free_caster_params(t_vars *var, t_imgs *img, char *str)
 		error_exit("BAD CODE\n");
 }
 
-int		ray_caster(t_vars *var)
+int				ray_caster(t_vars *var)
 {
 	int		i;
 	int		j;
@@ -117,7 +117,7 @@ int		ray_caster(t_vars *var)
 	t_imgs	img[6];
 
 	set_mlx_texture_imgs(var, img);
-	malloc_or_free_caster_params(var, img, "malloc");
+	malloc_or_free_caster_param(var, img, "malloc");
 	camera_update(var);
 	i = -1;
 	while (++i < var->map->res_width)
@@ -134,6 +134,6 @@ int		ray_caster(t_vars *var)
 			put_pixel_ceilflo(img, i, j++, var->map->floor_color);
 	}
 	sprite_caster_and_frame_to_win(var, img);
-	malloc_or_free_caster_params(var, img, "free");
+	malloc_or_free_caster_param(var, img, "free");
 	return (0);
 }
