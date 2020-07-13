@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 12:29:21 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 20:18:49 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 11:35:55 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int		write_bmp_header(int fd, t_vars *var)
 
 	hex = 0x4D42;
 	write(fd, &hex, 2);
-	hex = var->map->res_width * var->map->res_height * 4 + 54;
+	hex = var->map->res_height * var->map->res_width * 4 + 54;
 	write(fd, &hex, 4);
 	hex = 0x00000;
 	write(fd, &hex, 2);
@@ -62,15 +62,16 @@ static int		write_bmp_data(int fd, t_vars *var, t_imgs img)
 	int					row;
 	unsigned int		color;
 
-	col = -1;
-	while (++col < var->map->res_width)
+	row = -1;
+	while (++row < var->map->res_height)
 	{
-		row = -1;
-		while (++row < var->map->res_height)
+		col = -1;
+		while (++col < var->map->res_width)
 		{
-			printf("pixel %d %d asignado\n", row, col);
-			color = *(unsigned int*)(img.addr + row * img.ll
-				+ col * (img.bpp / 8));
+			//printf("bytes per pixel: %d\n", img.bpp / 8);
+			//printf("pixel %d %d asignado\n", row, col);
+			color = *(unsigned int *)(img.addr + (var->map->res_height - 1 - row)
+				* img.ll + col * (img.bpp / 8));
 			if (write(fd, &color, 4) < 0)
 				return (0);
 		}

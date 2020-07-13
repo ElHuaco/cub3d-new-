@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:44 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 19:47:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/13 10:28:07 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int			is_map_values_topoerr(char **val, int i, int j, int arr_size)
 
 	k[0] = ft_strlen(val[i]) - 1;
 	k[1] = -1;
-	while (val[i][++k[1]] == ' ')
+	while (val[i][++(*(k + 1))] == ' ')
 		;
 	k[2] = k[0] + 1;
-	while (val[i][--l] == ' ')
+	while (val[i][--(*(k + 2))] == ' ')
 		;
-	if ((vakl[i][k[1]] != '1') || (val[i][l] != '1'))
+	if ((val[i][k[1]] != '1') || (val[i][k[2]] != '1'))
 		return (1);
 	else if ((!i || (i == arr_size))
 		&& ((val[i][j] != '1') && (val[i][j] != ' ')))
