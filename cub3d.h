@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 12:35:26 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:23:29 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ typedef struct		s_sprites
 	double			x;
 	double			y;
 	double			dist;
+	int				startX;
+	int				startY;
+	double			width;
+	double			height;
 }					t_sprites;
 
 typedef struct		s_maps

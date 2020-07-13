@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 20:19:54 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:22:54 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,16 @@ static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *i)
 	c = l[0] - 1;
 	while (++c < l[1] - 1)
 	{
-		s[0] = (c - l[0]) * i[5].img_w * fabs(p[1] / v->map->res_height);
+		s[0] = (c - v->map->sprites->startX) * i[5].img_w
+			/ v->map->sprites->width;
 		if ((p[1] > 0) && (c > 0) && (c < v->map->res_width)
 				&& (p[1] < v->ray_distance[c]))
 		{
 			r = l[2] - 1;
 			while (++r < l[3])
 			{
-				s[1] = (r - l[2]) * i[5].img_h
-				* fabs(p[1] / v->map->res_height);
+				s[1] = (r - v->map->sprites->startY) * i[5].img_h
+					/ v->map->sprites->height;
 				dst = i[0].addr + r * i[0].ll + c * (i[0].bpp / 8);
 				src = i[5].addr + s[1] * i[5].ll + s[0] * (i[5].bpp / 8);
 				if (*(unsigned int *)src != 0)

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 16:13:34 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/02 12:27:16 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:19:42 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,21 @@ void		set_sprite_limits(t_vars *var, int *len, double *proyect)
 
 	scaling = fabs(var->map->res_height / proyect[1]);
 	len[2] = (int)(0.5 * (var->map->res_height - scaling));
+	len[3] = (int)(0.5 * (var->map->res_height + scaling));
+	var->map->sprites->startY = len[2];
+	var->map->sprites->height = scaling;
 	if (len[2] < 0)
 		len[2] = 0;
-	len[3] = (int)(0.5 * (var->map->res_height + scaling));
 	if (len[3] >= var->map->res_height)
 		len[3] = var->map->res_height - 1;
 	len[0] = (int)(0.5 * (var->map->res_width * (1 + proyect[0] / proyect[1])
 		- scaling));
-	if (len[0] < 0)
-		len[0] = 0;
 	len[1] = (int)(0.5 * (var->map->res_width * (1 + proyect[0] / proyect[1])
 		+ scaling));
+	var->map->sprites->startX = len[0];
+	var->map->sprites->width = scaling;
+	if (len[0] < 0)
+		len[0] = 0;
 	if (len[1] >= var->map->res_width)
 		len[1] = var->map->res_width - 1;
 }
