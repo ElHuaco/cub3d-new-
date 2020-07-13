@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 12:23:29 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:36:52 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct		s_sprites
 	double			x;
 	double			y;
 	double			dist;
-	int				startX;
-	int				startY;
+	int				startx;
+	int				starty;
 	double			width;
 	double			height;
 }					t_sprites;
@@ -79,19 +79,19 @@ typedef struct		s_vars
 	void			*win;
 	void			*mlx;
 	t_maps			*map;
-	double			dirX;
-	double			dirY;
-	double			posX;
-	double			posY;
-	double			planeX;
-	double			planeY;
-	double			rayX;
-	double			rayY;
+	double			dirx;
+	double			diry;
+	double			posx;
+	double			posy;
+	double			planex;
+	double			planey;
+	double			rayx;
+	double			rayy;
 	char			side;
 	double			*ray_hit;
 	double			*ray_distance;
-	double			Lmove;
-	double			Pmove;
+	double			lmove;
+	double			pmove;
 	double			rot;
 	int				must_save;
 }					t_vars;

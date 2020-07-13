@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 12:02:44 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:51:51 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int			set_initial_camera_pos(t_vars *var, t_maps *map, int i, int j)
 	if ((c == 'W') || (c == 'E') || (c == 'N') || (c == 'S')
 		|| (c == 'N'))
 	{
-		var->dirX = -1 * (c == 'N') + 1 * (c == 'S');
-		var->dirY = -1 * (c == 'W') + 1 * (c == 'E');
-		var->posX = j + 0.5;
-		var->posY = i + 0.5;
-		var->planeX = 0.66 * (c == 'E') - 0.66 * (c == 'W')
+		var->dirx = 1 * (c == 'N') - 1 * (c == 'S');
+		var->diry = -1 * (c == 'W') + 1 * (c == 'E');
+		var->posx = j + 0.5;
+		var->posy = i + 0.5;
+		var->planex = 0.66 * (c == 'E') - 0.66 * (c == 'W')
 			+ 0.0 * ((c == 'N') || (c == 'S'));
-		var->planeY = 0.66 * (c == 'N') - 0.66 * (c == 'S')
+		var->planey = 0.66 * (c == 'S') - 0.66 * (c == 'N')
 			+ 0.0 * ((c == 'W') || (c == 'E'));
 		map->val[i][j] = '0';
 		var->rot = 0;
-		var->Pmove = 0;
-		var->Lmove = 0;
+		var->pmove = 0;
+		var->lmove = 0;
 		return (1);
 	}
 	else

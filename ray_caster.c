@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 11:26:32 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 11:44:59 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:40:33 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,38 @@ static void		cast_till_wall(t_vars *var, int *cell, double *dist)
 		{
 			dist[2] += dist[0];
 			cell[0] += (int)dist[5];
-			var->side = (var->rayX < 0) ? 'w' : 'e';
+			var->side = (var->rayx < 0) ? 'w' : 'e';
 		}
 		else
 		{
 			dist[3] += dist[1];
 			cell[1] += (int)dist[6];
-			var->side = (var->rayY < 0) ? 's' : 'n';
+			var->side = (var->rayy < 0) ? 's' : 'n';
 		}
 	}
 }
 
 static void		set_initial_steps(t_vars *v, double *d, int *m)
 {
-	if (v->rayX < 0)
+	if (v->rayx < 0)
 	{
 		d[5] = -1.0;
-		d[2] = (v->posX - m[0]) * d[0];
+		d[2] = (v->posx - m[0]) * d[0];
 	}
 	else
 	{
 		d[5] = 1.0;
-		d[2] = (m[0] + 1.0 - v->posX) * d[0];
+		d[2] = (m[0] + 1.0 - v->posx) * d[0];
 	}
-	if (v->rayY < 0)
+	if (v->rayy < 0)
 	{
 		d[6] = -1.0;
-		d[3] = (v->posY - m[1]) * d[1];
+		d[3] = (v->posy - m[1]) * d[1];
 	}
 	else
 	{
 		d[6] = 1.0;
-		d[3] = (m[1] + 1.0 - v->posY) * d[1];
+		d[3] = (m[1] + 1.0 - v->posy) * d[1];
 	}
 }
 
@@ -62,23 +62,23 @@ static double	ray_distance(t_vars *var, int col)
 	int			map_cell[2];
 
 	camera = 2 * col / (double)var->map->res_width - 1;
-	var->rayX = var->dirX + var->planeX * camera;
-	var->rayY = var->dirY + var->planeY * camera;
-	map_cell[0] = (int)var->posX;
-	map_cell[1] = (int)var->posY;
-	dist[0] = fabs(1 / var->rayX);
-	dist[1] = fabs(1 / var->rayY);
+	var->rayx = var->dirx + var->planex * camera;
+	var->rayy = var->diry + var->planey * camera;
+	map_cell[0] = (int)var->posx;
+	map_cell[1] = (int)var->posy;
+	dist[0] = fabs(1 / var->rayx);
+	dist[1] = fabs(1 / var->rayy);
 	set_initial_steps(var, dist, map_cell);
 	cast_till_wall(var, map_cell, dist);
 	if ((var->side == 'w') || (var->side == 'e'))
 	{
-		dist[4] = (map_cell[0] - var->posX + (1 - dist[5]) / 2) / var->rayX;
-		var->ray_hit[col] = var->posY + dist[4] * var->rayY;
+		dist[4] = (map_cell[0] - var->posx + (1 - dist[5]) / 2) / var->rayx;
+		var->ray_hit[col] = var->posy + dist[4] * var->rayy;
 	}
 	else
 	{
-		dist[4] = (map_cell[1] - var->posY + (1 - dist[6]) / 2) / var->rayY;
-		var->ray_hit[col] = var->posX + dist[4] * var->rayX;
+		dist[4] = (map_cell[1] - var->posy + (1 - dist[6]) / 2) / var->rayy;
+		var->ray_hit[col] = var->posx + dist[4] * var->rayx;
 	}
 	var->ray_hit[col] -= floor(var->ray_hit[col]);
 	return (dist[4]);

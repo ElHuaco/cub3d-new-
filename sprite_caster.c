@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 12:22:54 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:41:05 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	find_sprite_pos_and_dist(t_vars *var)
 				var->map->sprites[++k].x = j + 0.5;
 				var->map->sprites[k].y = i + 0.5;
 				var->map->sprites[k].dist =
-					pow(var->posX - j - 0.5, 2) + pow(var->posY - i - 0.5, 2);
+					pow(var->posx - j - 0.5, 2) + pow(var->posy - i - 0.5, 2);
 			}
 		}
 	}
@@ -83,29 +83,28 @@ static void	sort_sprites_by_distance(t_vars *var)
 	}
 }
 
-static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *i)
+static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *im)
 {
 	char	*dst;
 	char	*src;
 	int		s[2];
-	int		c;
-	int		r;
+	int		i[2];
 
-	c = l[0] - 1;
-	while (++c < l[1] - 1)
+	*(i + 0) = l[0] - 1;
+	while (++(*(i + 0)) < l[1] - 1)
 	{
-		s[0] = (c - v->map->sprites->startX) * i[5].img_w
+		s[0] = (*(i + 0) - v->map->sprites->startx) * im[5].img_w
 			/ v->map->sprites->width;
-		if ((p[1] > 0) && (c > 0) && (c < v->map->res_width)
-				&& (p[1] < v->ray_distance[c]))
+		if ((p[1] > 0) && (*(i + 0) > 0) && (*(i + 0) < v->map->res_width)
+				&& (p[1] < v->ray_distance[*(i + 0)]))
 		{
-			r = l[2] - 1;
-			while (++r < l[3])
+			*(i + 1) = l[2] - 1;
+			while (++(*(i + 1)) < l[3])
 			{
-				s[1] = (r - v->map->sprites->startY) * i[5].img_h
+				s[1] = (*(i + 1) - v->map->sprites->starty) * im[5].img_h
 					/ v->map->sprites->height;
-				dst = i[0].addr + r * i[0].ll + c * (i[0].bpp / 8);
-				src = i[5].addr + s[1] * i[5].ll + s[0] * (i[5].bpp / 8);
+				dst = im[0].addr + *(i + 1) * im[0].ll + *i * (im[0].bpp / 8);
+				src = im[5].addr + s[1] * im[5].ll + s[0] * (im[5].bpp / 8);
 				if (*(unsigned int *)src != 0)
 					*(unsigned int *)dst = *(unsigned int *)src;
 			}
@@ -125,18 +124,15 @@ void		sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img)
 	i = -1;
 	while (++i < var->map->sprite_num)
 	{
-		var->map->sprites[i].x -= var->posX;
-		var->map->sprites[i].y -= var->posY;
-		len[4] = 1.0 / (var->planeX * var->dirY - var->planeY * var->dirX);
-		proyect[0] = (var->dirY * var->map->sprites[i].x
-			- var->dirX * var->map->sprites[i].y) * len[4];
-		proyect[1] = (-1 * var->planeY * var->map->sprites[i].x
-			+ var->planeX * var->map->sprites[i].y) * len[4];
-		if (fabs(proyect[1]) > 10e-7)
-		{
-			set_sprite_limits(var, len, proyect);
-			put_sprite_img(var, len, proyect, img);
-		}
+		var->map->sprites[i].x -= var->posx;
+		var->map->sprites[i].y -= var->posy;
+		len[4] = 1.0 / (var->planex * var->diry - var->planey * var->dirx);
+		proyect[0] = (var->diry * var->map->sprites[i].x
+			- var->dirx * var->map->sprites[i].y) * len[4];
+		proyect[1] = (-1 * var->planey * var->map->sprites[i].x
+			+ var->planex * var->map->sprites[i].y) * len[4];
+		set_sprite_limits(var, len, proyect);
+		put_sprite_img(var, len, proyect, img);
 	}
 	mlx_put_image_to_window(var->mlx, var->win, img[0].img, 0, 0);
 	if (var->must_save == 1)

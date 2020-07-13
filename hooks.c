@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 10:56:00 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/09 20:09:31 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:39:07 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int			press_update(int key, t_vars *var)
 	if (key == ESC)
 		x_close(var);
 	else if (key == W || key == UP)
-		var->Pmove = CAM_VEL;
+		var->pmove = CAM_VEL;
 	else if (key == S || key == DOWN)
-		var->Pmove = -1 * CAM_VEL;
+		var->pmove = -1 * CAM_VEL;
 	else if (key == A)
-		var->Lmove = 0.5 * CAM_VEL;
+		var->lmove = 0.5 * CAM_VEL;
 	else if (key == D)
-		var->Lmove = -0.5 * CAM_VEL;
+		var->lmove = -0.5 * CAM_VEL;
 	else if (key == RIGHT)
 		var->rot = -1 * ROT_VEL;
 	else if (key == LEFT)
@@ -34,9 +34,9 @@ int			press_update(int key, t_vars *var)
 int			release_update(int key, t_vars *var)
 {
 	if (key == W || key == UP || key == S || key == DOWN)
-		var->Pmove = 0;
+		var->pmove = 0;
 	else if (key == A || key == D)
-		var->Lmove = 0;
+		var->lmove = 0;
 	else if (key == RIGHT || key == LEFT)
 		var->rot = 0;
 	return (0);
