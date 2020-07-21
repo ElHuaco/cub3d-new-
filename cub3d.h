@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/21 10:48:53 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/21 11:22:35 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,6 @@ void				sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img);
 **		sprite_calc_utils
 */
 void				set_sprite_limits(t_vars *v, int *len, double *pro);
-t_sprites			*duplicate_sprite(t_sprites src);
+t_sprites			duplicate_sprite(t_sprites src);
 void				replace_sprite(t_sprites *dst, t_sprites *src);
 #endif

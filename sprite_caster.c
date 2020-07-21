@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/21 10:59:01 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/21 11:55:42 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	sort_sprites_by_distance(t_vars *var)
 {
 	int			i;
 	int			j;
-	t_sprites	*temp;
+	t_sprites	temp;
 
 	i = -1;
 	while (++i < var->map->sprite_num)
@@ -77,8 +77,7 @@ static void	sort_sprites_by_distance(t_vars *var)
 				temp = duplicate_sprite(var->map->sprites[i]);
 				replace_sprite(var->map->sprites + i,
 					var->map->sprites + j);
-				replace_sprite(var->map->sprites + j, temp);
-				free(temp);
+				replace_sprite(var->map->sprites + j, &temp);
 			}
 		}
 	}
@@ -99,17 +98,18 @@ static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *im)
 		if ((p[1] > 0) && (*(i + 0) > 0) && (*(i + 0) < v->map->res_width)
 				&& (p[1] < v->ray_distance[*(i + 0)]))
 		{
-			if ((i[0] > v->map->res_width / 3) && (i[0] < 2 * v->map->res_width / 3))
+		/*	if ((i[0] > v->map->res_width / 3) && (i[0] < 2 * v->map->res_width / 3))
 			{
 			printf("columna %d->\n\tsprite depth: %f; wall_perpdist: %f\n", i[0], p[1], v->ray_distance[i[0]]);
 			printf("\tsprite H: %i; wall H: %i\n", v->map->sprites->height,
 				v->map->wall_lineheight[i[0]]);
-			}
+			}*/
 			*(i + 1) = l[2] - 1;
-			while (++(*(i + 1)) < l[3])
+			while (++(*(i + 1)) < l[3] - 1)
 			{
 				s[1] = (*(i + 1) - v->map->sprites->starty) * im[5].img_h
 					/ v->map->sprites->height;
+				//printf("chose sprexel %d %d to pixel %d %d \n", s[1], s[0], i[1], i[0]);
 				dst = im[0].addr + *(i + 1) * im[0].ll + *i * (im[0].bpp / 8);
 				src = im[5].addr + s[1] * im[5].ll + s[0] * (im[5].bpp / 8);
 				if (*(unsigned int *)src != 0)

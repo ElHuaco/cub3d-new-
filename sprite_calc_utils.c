@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 16:13:34 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/21 10:49:58 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/21 11:22:59 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ void		set_sprite_limits(t_vars *var, int *len, double *proyect)
 		len[1] = var->map->res_width - 1;
 }
 
-t_sprites	*duplicate_sprite(t_sprites src)
+t_sprites	duplicate_sprite(t_sprites src)
 {
-	t_sprites	*dup;
-
-	dup = malloc(sizeof(t_sprites) * 1);
-	dup->x = src.x;
-	dup->y = src.y;
-	dup->dist = src.dist;
+	t_sprites	dup;
+;
+	dup.x = src.x;
+	dup.y = src.y;
+	dup.dist = src.dist;
 	return (dup);
 }
 
