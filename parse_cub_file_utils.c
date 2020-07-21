@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 12:58:57 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/21 10:07:31 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int			set_initial_camera_pos(t_vars *var, t_maps *map, int i, int j)
 
 int			set_floor_ceil_color(t_maps *map, char *buff, int i)
 {
-	int		j;
 	int		ceil_or_floor;
 	int		color[3];
 
@@ -48,22 +47,22 @@ int			set_floor_ceil_color(t_maps *map, char *buff, int i)
 	while (buff[++i] == ' ')
 		;
 	color[0] = ft_atoi(buff + i) * 65536;
-	j = -1;
-	while (ft_isdigit(buff[i + ++j]))
-		;
-	i += j + 1;
+	i += digit_number(color[0] / 65536, 10) + 1;
 	color[1] = ft_atoi(buff + i) * 256;
-	j = -1;
-	while (ft_isdigit(buff[i + ++j]))
-		;
-	i += j + 1;
+	i += digit_number(color[1] / 256, 10) + 1;
 	color[2] = ft_atoi(buff + i);
 	if ((color[0] < 0) || (color[1] < 0) || (color[2] < 0))
-		error_exit(EINFO);
+		error_exit(EINFOC);
 	if (!ceil_or_floor)
+	{
 		map->floor_color = color[0] + color[1] + color[2];
+		map->is_floor_color_set = 1;
+	}
 	else
+	{
 		map->ceiling_color = color[0] + color[1] + color[2];
+		map->is_ceil_color_set = 1;
+	}
 	return (i + digit_number(color[2], 10));
 }
 
@@ -85,7 +84,7 @@ int			set_window_resolution(t_maps *map, char *buff, int i)
 		;
 	map->res_height = ft_atoi(buff + i);
 	if ((map->res_width <= 0) || (map->res_height <= 0))
-		error_exit(EINFO);
+		error_exit(EINFOR);
 	map->res_width = (map->res_width > 2575) ? 2575 : map->res_width;
 	map->res_height = (map->res_height > 1440) ? 1440 : map->res_height;
 	return (i + j);
@@ -102,19 +101,19 @@ int			set_texture_paths(t_maps *map, char *buff, int i)
 		;
 	k = i;
 	if ((buff[i] != '.') || (buff[i + 1] != '/'))
-		error_exit(EINFO);
+		error_exit(EINFOT);
 	while (buff[i++] != '\n')
 		;
 	buff[i - 1] = 0;
-	if (buff[j] == 'N')
+	if ((buff[j] == 'N') && (buff[j + 1] == 'O') && !(map->north))
 		map->north = ft_strdup(buff + k);
-	else if ((buff[j] == 'S') && (buff[j + 1] == 'O'))
+	else if ((buff[j] == 'S') && (buff[j + 1] == 'O') && !(map->south))
 		map->south = ft_strdup(buff + k);
-	else if (buff[j] == 'W')
+	else if ((buff[j] == 'W') && (buff[j + 1] == 'E') && !(map->west))
 		map->west = ft_strdup(buff + k);
-	else if (buff[j] == 'E')
+	else if ((buff[j] == 'E') && (buff[j + 1] == 'A') && !(map->east))
 		map->east = ft_strdup(buff + k);
-	else
+	else if ((buff[j] == 'S') && !(map->sprite))
 		map->sprite = ft_strdup(buff + k);
 	return (i);
 }

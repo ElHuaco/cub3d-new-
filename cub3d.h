@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 12:36:52 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/21 10:48:53 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@
 # define EOPEN "Error opening file\n"
 # define EWR "Error writing file\n"
 # define EPLAPOS "Starting position count not 1\n"
-# define ENONCHR "Found symbol outside cub file standard\n"
+# define ENONCHR "Found symbol outside cub file standard in map values\n"
 # define ENOTCLO "Map not enclosed by walls\n"
-# define EINFO "Wrong information in cub file parameters\n"
+# define EINFOC "Wrong information in C or F color parameters\n"
+# define EINFOR "Wrong information in window resolution\n"
+# define EINFOT "Wrong information in texture path. Must be in same folder\n"
+# define EINFO "Wrong cub file info: arrived at non-descriptive char\n"
 # define ETEXPATH "Texture file not found\n"
 # define EARG "Wrong argument use\n"
 # define EMLX "mlx init failure\n"
@@ -51,8 +54,8 @@ typedef struct		s_sprites
 	double			dist;
 	int				startx;
 	int				starty;
-	double			width;
-	double			height;
+	int				width;
+	int				height;
 }					t_sprites;
 
 typedef struct		s_maps
@@ -68,6 +71,8 @@ typedef struct		s_maps
 	int				res_width;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
+	int				is_floor_color_set;
+	int				is_ceil_color_set;
 	int				*wall_lineheight;
 	int				*wall_start;
 	int				sprite_num;
@@ -154,6 +159,6 @@ void				sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img);
 **		sprite_calc_utils
 */
 void				set_sprite_limits(t_vars *v, int *len, double *pro);
-t_sprites			duplicate_sprite(t_sprites src);
+t_sprites			*duplicate_sprite(t_sprites src);
 void				replace_sprite(t_sprites *dst, t_sprites *src);
 #endif

@@ -1,0 +1,5 @@
+- crashes tras cierto tiempo
+- crashes al empezar en map5 con S y mover hacia atrás o adelante
+	desde un extremo
+- error direcciones si E
+- correcto ocultamiento sprites

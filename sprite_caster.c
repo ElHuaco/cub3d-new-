@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 13:25:00 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/21 10:59:01 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	sort_sprites_by_distance(t_vars *var)
 {
 	int			i;
 	int			j;
-	t_sprites	temp;
+	t_sprites	*temp;
 
 	i = -1;
 	while (++i < var->map->sprite_num)
@@ -77,7 +77,8 @@ static void	sort_sprites_by_distance(t_vars *var)
 				temp = duplicate_sprite(var->map->sprites[i]);
 				replace_sprite(var->map->sprites + i,
 					var->map->sprites + j);
-				replace_sprite(var->map->sprites + j, &temp);
+				replace_sprite(var->map->sprites + j, temp);
+				free(temp);
 			}
 		}
 	}
@@ -98,6 +99,12 @@ static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *im)
 		if ((p[1] > 0) && (*(i + 0) > 0) && (*(i + 0) < v->map->res_width)
 				&& (p[1] < v->ray_distance[*(i + 0)]))
 		{
+			if ((i[0] > v->map->res_width / 3) && (i[0] < 2 * v->map->res_width / 3))
+			{
+			printf("columna %d->\n\tsprite depth: %f; wall_perpdist: %f\n", i[0], p[1], v->ray_distance[i[0]]);
+			printf("\tsprite H: %i; wall H: %i\n", v->map->sprites->height,
+				v->map->wall_lineheight[i[0]]);
+			}
 			*(i + 1) = l[2] - 1;
 			while (++(*(i + 1)) < l[3])
 			{
@@ -137,4 +144,5 @@ void		sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img)
 	mlx_put_image_to_window(var->mlx, var->win, img[0].img, 0, 0);
 	if (var->must_save == 1)
 		screenshot(var, img[0]);
+	free(var->map->sprites);
 }

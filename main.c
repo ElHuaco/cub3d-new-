@@ -6,29 +6,36 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 12:52:52 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 11:55:04 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/07/21 09:49:03 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		set_map_params_to_zero(t_maps *map)
+static void		init_map_params(t_maps *map)
 {
 	map->res_width = 0;
 	map->res_height = 0;
+	map->is_ceil_color_set = 0;
+	map->is_floor_color_set = 0;
 	map->ceiling_color = 0;
 	map->floor_color = 0;
+	map->north = 0;
+	map->south = 0;
+	map->west = 0;
+	map->east = 0;
+	map->sprite = 0;
 }
 
 static int		parse_map_params(t_maps *map, char *buff)
 {
 	int		i;
 
-	set_map_params_to_zero(map);
+	init_map_params(map);
 	i = 0;
 	while (!(map->north) || !(map->south) || !(map->west) || !(map->east)
 		|| !(map->sprite) || !(map->res_width) || !(map->res_height)
-		|| !(map->ceiling_color) || !(map->floor_color))
+		|| !(map->is_ceil_color_set) || !(map->is_floor_color_set))
 	{
 		if (buff[i] == 'R')
 			i = set_window_resolution(map, buff, i);
