@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/21 10:07:31 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/08/03 14:48:15 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			set_initial_camera_pos(t_vars *var, t_maps *map, int i, int j)
 		var->dirx = -1 * (c == 'W') + 1 * (c == 'E');
 		var->posx = j + 0.5;
 		var->posy = i + 0.5;
-		var->planey = -0.66 * (c == 'E') + 0.66 * (c == 'W')
+		var->planey = 0.66 * (c == 'E') - 0.66 * (c == 'W')
 			+ 0.0 * ((c == 'N') || (c == 'S'));
 		var->planex = -0.66 * (c == 'S') + 0.66 * (c == 'N')
 			+ 0.0 * ((c == 'W') || (c == 'E'));
