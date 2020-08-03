@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/21 11:55:42 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/08/03 14:21:55 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,21 +95,24 @@ static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *im)
 	{
 		s[0] = (*(i + 0) - v->map->sprites->startx) * im[5].img_w
 			/ v->map->sprites->width;
+if ((p[1] > 0) && (p[1] > v->ray_distance[i[0]])){
+printf("Not Showing sprite proyection: %f, wall distance: %f\n", p[1], v->ray_distance[i[0]]);
+}
+else if(p[1] > 0){
+printf("Showing sprite proyection: %f, wall distance: %f\n", p[1], v->ray_distance[i[0]]);
+}
+
+//Lo que ocurre es que se calcula la distancia solo para la columna central del sprite, que es la que se compara con la distancia a todos los muros que llega el sprite. ¿Qué hace respecto de esto Lode entonces?
+//Efectivamente p[1] < 0 cuando esta por detras
 		if ((p[1] > 0) && (*(i + 0) > 0) && (*(i + 0) < v->map->res_width)
-				&& (p[1] < v->ray_distance[*(i + 0)]))
+			&& (p[1] < v->ray_distance[*(i + 0)]))
+		//	&& (l[3] - v->map->sprites->starty) < v->map->wall_lineheight[i[0]]))
 		{
-		/*	if ((i[0] > v->map->res_width / 3) && (i[0] < 2 * v->map->res_width / 3))
-			{
-			printf("columna %d->\n\tsprite depth: %f; wall_perpdist: %f\n", i[0], p[1], v->ray_distance[i[0]]);
-			printf("\tsprite H: %i; wall H: %i\n", v->map->sprites->height,
-				v->map->wall_lineheight[i[0]]);
-			}*/
 			*(i + 1) = l[2] - 1;
 			while (++(*(i + 1)) < l[3] - 1)
 			{
 				s[1] = (*(i + 1) - v->map->sprites->starty) * im[5].img_h
 					/ v->map->sprites->height;
-				//printf("chose sprexel %d %d to pixel %d %d \n", s[1], s[0], i[1], i[0]);
 				dst = im[0].addr + *(i + 1) * im[0].ll + *i * (im[0].bpp / 8);
 				src = im[5].addr + s[1] * im[5].ll + s[0] * (im[5].bpp / 8);
 				if (*(unsigned int *)src != 0)
@@ -133,11 +136,12 @@ void		sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img)
 	{
 		var->map->sprites[i].x -= var->posx;
 		var->map->sprites[i].y -= var->posy;
-		len[4] = 1.0 / (var->planex * var->diry - var->planey * var->dirx);
+		*((double *)len + 4) = 1.0
+			/ (var->planex * var->diry - var->planey * var->dirx);
 		proyect[0] = (var->diry * var->map->sprites[i].x
-			- var->dirx * var->map->sprites[i].y) * len[4];
+			- var->dirx * var->map->sprites[i].y) * *((double *)len + 4);
 		proyect[1] = (-1 * var->planey * var->map->sprites[i].x
-			+ var->planex * var->map->sprites[i].y) * len[4];
+			+ var->planex * var->map->sprites[i].y) * *((double *)len + 4);
 		set_sprite_limits(var, len, proyect);
 		put_sprite_img(var, len, proyect, img);
 	}
