@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/08/03 14:21:55 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/08/03 14:40:02 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,8 @@ static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *im)
 	{
 		s[0] = (*(i + 0) - v->map->sprites->startx) * im[5].img_w
 			/ v->map->sprites->width;
-if ((p[1] > 0) && (p[1] > v->ray_distance[i[0]])){
-printf("Not Showing sprite proyection: %f, wall distance: %f\n", p[1], v->ray_distance[i[0]]);
-}
-else if(p[1] > 0){
-printf("Showing sprite proyection: %f, wall distance: %f\n", p[1], v->ray_distance[i[0]]);
-}
-
-//Lo que ocurre es que se calcula la distancia solo para la columna central del sprite, que es la que se compara con la distancia a todos los muros que llega el sprite. ¿Qué hace respecto de esto Lode entonces?
-//Efectivamente p[1] < 0 cuando esta por detras
 		if ((p[1] > 0) && (*(i + 0) > 0) && (*(i + 0) < v->map->res_width)
 			&& (p[1] < v->ray_distance[*(i + 0)]))
-		//	&& (l[3] - v->map->sprites->starty) < v->map->wall_lineheight[i[0]]))
 		{
 			*(i + 1) = l[2] - 1;
 			while (++(*(i + 1)) < l[3] - 1)

@@ -1,3 +1,2 @@
 - crashes tras cierto tiempo
 - error direcciones si E
-- correcto ocultamiento sprites
