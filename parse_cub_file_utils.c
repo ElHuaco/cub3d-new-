@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/08/03 14:48:15 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/08/20 17:49:00 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,35 +105,30 @@ int			set_texture_paths(t_maps *map, char *buff, int i)
 	while (buff[i++] != '\n')
 		;
 	buff[i - 1] = 0;
-	if ((buff[j] == 'N') && (buff[j + 1] == 'O') && !(map->north))
-		map->north = ft_strdup(buff + k);
-	else if ((buff[j] == 'S') && (buff[j + 1] == 'O') && !(map->south))
-		map->south = ft_strdup(buff + k);
-	else if ((buff[j] == 'W') && (buff[j + 1] == 'E') && !(map->west))
-		map->west = ft_strdup(buff + k);
-	else if ((buff[j] == 'E') && (buff[j + 1] == 'A') && !(map->east))
-		map->east = ft_strdup(buff + k);
-	else if ((buff[j] == 'S') && !(map->sprite))
-		map->sprite = ft_strdup(buff + k);
+	if ((buff[j] == 'N') && (buff[j + 1] == 'O') && !(map->side[0]))
+		map->side[0] = ft_strdup(buff + k);
+	else if ((buff[j] == 'S') && (buff[j + 1] == 'O') && !(map->side[1]))
+		map->side[1] = ft_strdup(buff + k);
+	else if ((buff[j] == 'W') && (buff[j + 1] == 'E') && !(map->side[2]))
+		map->side[2] = ft_strdup(buff + k);
+	else if ((buff[j] == 'E') && (buff[j + 1] == 'A') && !(map->side[3]))
+		map->side[3] = ft_strdup(buff + k);
+	else if ((buff[j] == 'S') && (buff[j + 1] != 'O') && !(map->side[4]))
+		map->side[4] = ft_strdup(buff + k);
 	return (i);
 }
 
-void		set_mlx_texture_imgs(t_vars *var, t_imgs *img)
+void		set_image_textures(t_vars *var, t_imgs *img)
 {
 	int		i;
 
 	img[0].img = mlx_new_image(var->mlx, var->map->res_width,
 		var->map->res_height);
-	img[1].img = mlx_xpm_file_to_image(var->mlx, var->map->north,
-		&img[1].img_w, &img[1].img_h);
-	img[2].img = mlx_xpm_file_to_image(var->mlx, var->map->south,
-		&img[2].img_w, &img[2].img_h);
-	img[3].img = mlx_xpm_file_to_image(var->mlx, var->map->west,
-		&img[3].img_w, &img[3].img_h);
-	img[4].img = mlx_xpm_file_to_image(var->mlx, var->map->east,
-		&img[4].img_w, &img[4].img_h);
-	img[5].img = mlx_xpm_file_to_image(var->mlx, var->map->sprite,
-		&img[5].img_w, &img[5].img_h);
+	i = 0;
+//NO=0, SO=1, WE= 2, EA=3
+	while (++i < 6)
+		img[i].img = mlx_xpm_file_to_image(var->mlx, var->map->side[i - 1],
+			&img[i].img_w, &img[i].img_h);
 	i = -1;
 	while (++i < 6)
 	{
@@ -142,5 +137,5 @@ void		set_mlx_texture_imgs(t_vars *var, t_imgs *img)
 				&img[i].ll, &img[i].endian);
 		else
 			error_exit(ETEXPATH);
-	}
+	}	
 }

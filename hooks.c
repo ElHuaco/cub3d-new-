@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 10:56:00 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 12:59:59 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/08/20 17:46:46 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,7 @@ int			release_update(int key, t_vars *var)
 
 int			x_close(t_vars *var)
 {
-	free(var->map->north);
-	free(var->map->south);
-	free(var->map->west);
-	free(var->map->east);
-	free(var->map->sprite);
+	full_free((void **)var->map->side, 5);
 	full_free((void **)var->map->val, var->map->height);
 	exit(0);
 	return (0);

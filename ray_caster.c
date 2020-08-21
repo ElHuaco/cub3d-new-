@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 11:26:32 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/13 12:40:33 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/08/20 17:47:14 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int				ray_caster(t_vars *var)
 	double	len[3];
 	t_imgs	img[6];
 
-	set_mlx_texture_imgs(var, img);
+	set_image_textures(var, img);
 	malloc_or_free_caster_param(var, img, "malloc");
 	camera_update(var);
 	i = -1;

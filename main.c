@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 12:52:52 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/21 09:49:03 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/08/20 18:53:40 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 static void		init_map_params(t_maps *map)
 {
+	int	i;
+
 	map->res_width = 0;
 	map->res_height = 0;
 	map->is_ceil_color_set = 0;
 	map->is_floor_color_set = 0;
 	map->ceiling_color = 0;
 	map->floor_color = 0;
-	map->north = 0;
-	map->south = 0;
-	map->west = 0;
-	map->east = 0;
-	map->sprite = 0;
+	map->side = malloc(sizeof(char *) * 5);
+	i = -1;
+	while (++i < 5)
+		map->side[i] = 0;
 }
 
 static int		parse_map_params(t_maps *map, char *buff)
@@ -33,8 +34,8 @@ static int		parse_map_params(t_maps *map, char *buff)
 
 	init_map_params(map);
 	i = 0;
-	while (!(map->north) || !(map->south) || !(map->west) || !(map->east)
-		|| !(map->sprite) || !(map->res_width) || !(map->res_height)
+	while (!(map->side[0]) || !(map->side[1]) || !(map->side[2]) || !(map->side[3])
+		|| !(map->side[4]) || !(map->res_width) || !(map->res_height)
 		|| !(map->is_ceil_color_set) || !(map->is_floor_color_set))
 	{
 		if (buff[i] == 'R')

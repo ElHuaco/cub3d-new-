@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/21 11:22:35 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/08/20 17:48:29 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,21 @@ typedef struct		s_sprites
 	int				height;
 }					t_sprites;
 
+typedef struct		s_img
+{
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				ll;
+	int				endian;
+	int				img_w;
+	int				img_h;
+}					t_imgs;
+
 typedef struct		s_maps
 {
 	char			**val;
-	char			*north;
-	char			*south;
-	char			*west;
-	char			*east;
+	char			**side;
 	char			*sprite;
 	int				height;
 	int				res_height;
@@ -76,6 +84,7 @@ typedef struct		s_maps
 	int				*wall_lineheight;
 	int				*wall_start;
 	int				sprite_num;
+	t_imgs			*img;
 	t_sprites		*sprites;
 }					t_maps;
 
@@ -100,18 +109,6 @@ typedef struct		s_vars
 	double			rot;
 	int				must_save;
 }					t_vars;
-
-typedef struct		s_img
-{
-	void			*img;
-	char			*addr;
-	int				bpp;
-	int				ll;
-	int				endian;
-	int				img_w;
-	int				img_h;
-}					t_imgs;
-
 /*
 **		ray_caster
 */
@@ -137,7 +134,7 @@ void				set_pixel_limits(t_vars *var, double *len, int col);
 */
 int					set_initial_camera_pos(t_vars *v, t_maps *m, int i, int j);
 int					set_floor_ceil_color(t_maps *map, char *buff, int i);
-void				set_mlx_texture_imgs(t_vars *var, t_imgs *img);
+void				set_image_textures(t_vars *var, t_imgs *img);
 int					set_window_resolution(t_maps *map, char *buff, int i);
 int					set_texture_paths(t_maps *map, char *buff, int i);
 /*
