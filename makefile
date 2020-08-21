@@ -4,29 +4,35 @@ OBJS = $(SRCS:.c=.o)
 
 FLAGS = -Werror -Wextra -Wall -O3
 
-LIB_FLAGS2 = -lmlx -framework OpenGL -framework Appkit
+LIB_FLAGS = -lmlx -lft
 
-LIB_FLAGS = -lft
+PATH1 = minilibx_opengl_20191021/
 
-PATH1 = /usr/local/include
-
-PATH2 = /usr/local/lib/
+PATH2 = minilibx_mms_20191025_beta/
 
 PATH3 = libft/
 
 LIB3 = libft.a
+
+LIB1 = libmlx.a
+
+LIB2 = libmlx.dylib
 
 NAME = cub3d
 
 RM = rm -f
 
 $(NAME):
+			cd $(PATH1) && make && mv $(LIB1) .. && cd ..
+			cd $(PATH2) && make && mv $(LIB2) .. && cd ..
 			cd $(PATH3) && make && mv $(LIB3) .. && cd ..
-			gcc $(FLAGS) -I $(PATH1) $(SRCS) -L. $(LIB_FLAGS) -L $(PATH2) $(LIB_FLAGS2) -o $(NAME)
+			gcc $(FLAGS) $(SRCS) -L. $(LIB_FLAGS) -o $(NAME)
 
 all:		$(NAME)
 
 clean:
+			cd $(PATH1) && make clean && cd ..
+			cd $(PATH2) && make clean && cd ..
 			cd $(PATH3) && make clean && cd ..
 			$(RM) $(OBJS)
 
