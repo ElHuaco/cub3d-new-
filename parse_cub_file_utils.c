@@ -83,7 +83,8 @@ int			set_window_resolution(t_maps *map, char *buff, int i)
 	while (ft_isdigit(buff[i + ++j]))
 		;
 	map->res_height = ft_atoi(buff + i);
-	if ((map->res_width <= 0) || (map->res_height <= 0))
+	if ((map->res_width <= 0) || (map->res_height <= 0)
+	    || ((map->res_width == 1) && (map->res_height == 1)))
 		error_exit(EINFOR);
 	map->res_width = (map->res_width > 2575) ? 2575 : map->res_width;
 	map->res_height = (map->res_height > 1440) ? 1440 : map->res_height;
