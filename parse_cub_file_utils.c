@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/01 10:36:23 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/01 14:07:13 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,24 +119,26 @@ int			set_texture_paths(t_maps *map, char *buff, int i)
 	return (i);
 }
 
-void		set_image_textures(t_vars *var, t_imgs *img)
+void		set_image_textures(t_vars *var)
 {
 	int		i;
 
-	img[0].img = mlx_new_image(var->mlx, var->map->res_width,
+	var->img = malloc(sizeof(t_imgs) * 6);
+	var->img[0].img = mlx_new_image(var->mlx, var->map->res_width,
 		var->map->res_height);
 	i = 0;
-//NO=0, SO=1, WE= 2, EA=3
 	while (++i < 6)
-		img[i].img = mlx_xpm_file_to_image(var->mlx, var->map->side[i - 1],
-			&img[i].img_w, &img[i].img_h);
+		var->img[i].img = mlx_xpm_file_to_image(var->mlx,
+			var->map->side[i - 1], &(var->img[i].img_w),
+			&(var->img[i].img_h));
 	i = -1;
 	while (++i < 6)
 	{
-		if (img[i].img)
-			img[i].addr = mlx_get_data_addr(img[i].img, &img[i].bpp,
-				&img[i].ll, &img[i].endian);
+		if (var->img[i].img)
+			var->img[i].addr = mlx_get_data_addr(var->img[i].img,
+				&(var->img[i].bpp), &(var->img[i].ll),
+				&(var->img[i].endian));
 		else
 			error_exit(ETEXPATH);
-	}	
+	}
 }

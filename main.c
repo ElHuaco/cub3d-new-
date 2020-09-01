@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 12:52:52 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/08/20 18:53:40 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/01 14:05:55 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ static int		parse_map_params(t_maps *map, char *buff)
 
 	init_map_params(map);
 	i = 0;
-	while (!(map->side[0]) || !(map->side[1]) || !(map->side[2]) || !(map->side[3])
-		|| !(map->side[4]) || !(map->res_width) || !(map->res_height)
-		|| !(map->is_ceil_color_set) || !(map->is_floor_color_set))
+	while (!(map->side[0]) || !(map->side[1]) || !(map->side[2])
+		|| !(map->side[3]) || !(map->side[4]) || !(map->res_width)
+		|| !(map->res_height) || !(map->is_ceil_color_set)
+		|| !(map->is_floor_color_set))
 	{
 		if (buff[i] == 'R')
 			i = set_window_resolution(map, buff, i);
@@ -128,6 +129,7 @@ int				main(int argc, char **argv)
 		var.map->res_width, var.map->res_height, "cub3d");
 	if (!var.win)
 		error_exit(EWIN);
+	set_image_textures(&var);
 	mlx_hook(var.win, 2, 1, press_update, &var);
 	mlx_hook(var.win, 3, 1, release_update, &var);
 	mlx_hook(var.win, 17, 0, x_close, &var);

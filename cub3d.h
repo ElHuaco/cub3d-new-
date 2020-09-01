@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/08/20 17:48:29 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/01 13:56:15 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct		s_vars
 	void			*win;
 	void			*mlx;
 	t_maps			*map;
+	t_imgs			*img;
 	double			dirx;
 	double			diry;
 	double			posx;
@@ -134,7 +135,7 @@ void				set_pixel_limits(t_vars *var, double *len, int col);
 */
 int					set_initial_camera_pos(t_vars *v, t_maps *m, int i, int j);
 int					set_floor_ceil_color(t_maps *map, char *buff, int i);
-void				set_image_textures(t_vars *var, t_imgs *img);
+void				set_image_textures(t_vars *var);
 int					set_window_resolution(t_maps *map, char *buff, int i);
 int					set_texture_paths(t_maps *map, char *buff, int i);
 /*

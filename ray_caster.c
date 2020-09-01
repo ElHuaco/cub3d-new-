@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 11:26:32 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/01 12:10:56 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/01 13:37:14 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,8 @@ static double	ray_distance(t_vars *var, int col)
 	return (dist[4]);
 }
 
-static void		malloc_or_free_caster_param(t_vars *var, t_imgs *im, char *str)
+static void		malloc_or_free_caster_param(t_vars *var, char *str)
 {
-	int i;
-
 	if (!(ft_strcmp(str, "malloc")))
 	{
 		var->ray_hit = malloc(sizeof(double) * var->map->res_width);
@@ -97,9 +95,6 @@ static void		malloc_or_free_caster_param(t_vars *var, t_imgs *im, char *str)
 	}
 	else if (!(ft_strcmp(str, "free")))
 	{
-		i = -1;
-		while (++i < 6)
-			mlx_destroy_image(var->win, im[i].img);
 		free(var->ray_hit);
 		free(var->map->wall_start);
 		free(var->map->wall_lineheight);
@@ -114,10 +109,8 @@ int				ray_caster(t_vars *var)
 	int		i;
 	int		j;
 	double	len[3];
-	t_imgs	img[6];
 
-	set_image_textures(var, img);
-	malloc_or_free_caster_param(var, img, "malloc");
+	malloc_or_free_caster_param(var, "malloc");
 	camera_update(var);
 	i = -1;
 	while (++i < var->map->res_width)
@@ -127,13 +120,13 @@ int				ray_caster(t_vars *var)
 		set_pixel_limits(var, len, i);
 		j = -1;
 		while (++j < (int)len[2])
-			put_pixel_ceilflo(img, i, j, var->map->ceiling_color);
+			put_pixel_ceilflo(var->img, i, j, var->map->ceiling_color);
 		while (j < (int)len[1])
-			put_pixel_wall_texture(img, i, j++, var);
+			put_pixel_wall_texture(var->img, i, j++, var);
 		while (j < var->map->res_height - 1)
-			put_pixel_ceilflo(img, i, j++, var->map->floor_color);
+			put_pixel_ceilflo(var->img, i, j++, var->map->floor_color);
 	}
-	sprite_caster_and_frame_to_win(var, img);
-	malloc_or_free_caster_param(var, img, "free");
+	sprite_caster_and_frame_to_win(var, var->img);
+	malloc_or_free_caster_param(var, "free");
 	return (0);
 }
