@@ -18,7 +18,7 @@ LIB1 = libmlx.a
 
 LIB2 = libmlx.dylib
 
-NAME = cub3d
+NAME = cub3D
 
 RM = rm -f
 

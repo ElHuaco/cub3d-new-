@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/08/20 17:49:00 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/01 10:36:23 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int			set_window_resolution(t_maps *map, char *buff, int i)
 		;
 	map->res_height = ft_atoi(buff + i);
 	if ((map->res_width <= 0) || (map->res_height <= 0)
-	    || ((map->res_width == 1) && (map->res_height == 1)))
+		|| ((map->res_width == 1) && (map->res_height == 1)))
 		error_exit(EINFOR);
 	map->res_width = (map->res_width > 2575) ? 2575 : map->res_width;
 	map->res_height = (map->res_height > 1440) ? 1440 : map->res_height;
