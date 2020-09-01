@@ -1,9 +1,14 @@
 *.xpm
 *.o
 *.a
+*.swiftmodule
+*.swiftsourceinfo
+*.swiftdoc
+*.dSYM
 *.swp
 *.dylib
 *.cub
+*.memgraph
 cub3d
 .swiftmodule
 .swiftdoc
