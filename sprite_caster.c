@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/01 10:42:00 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/02 12:29:13 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,20 @@ static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *im)
 	int		s[2];
 	int		i[2];
 
-	*(i + 0) = l[0] - 1;
+	i[0] = l[0] - 1;
 	while (++(*(i + 0)) < l[1] - 1)
 	{
-		s[0] = (*(i + 0) - v->map->sprites->startx) * im[5].img_w
+		s[0] = (i[0] - v->map->sprites->startx) * im[5].img_w
 			/ v->map->sprites->width;
-		if ((p[1] > 0) && (*(i + 0) > 0) && (*(i + 0) < v->map->res_width)
+		if ((p[1] > 0) && (i[0] > 0) && (i[0] < v->map->res_width)
 			&& (p[1] < v->ray_distance[*(i + 0)]))
 		{
-			*(i + 1) = l[2] - 1;
+			i[1] = l[2] - 1;
 			while (++(*(i + 1)) < l[3] - 1)
 			{
-				s[1] = (*(i + 1) - v->map->sprites->starty) * im[5].img_h
+				s[1] = (i[1] - v->map->sprites->starty) * im[5].img_h
 					/ v->map->sprites->height;
-				dst = im[0].addr + *(i + 1) * im[0].ll + *i * (im[0].bpp / 8);
+				dst = im[0].addr + i[1] * im[0].ll + i[0] * (im[0].bpp / 8);
 				src = im[5].addr + s[1] * im[5].ll + s[0] * (im[5].bpp / 8);
 				if (*(unsigned int *)src != 0)
 					*(unsigned int *)dst = *(unsigned int *)src;
