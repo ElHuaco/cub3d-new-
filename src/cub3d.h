@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/03 12:07:31 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/03 13:35:42 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "../libft/ft_printf.h"
 # include "../libft/get_next_line.h"
 # include <math.h>
-# include <stdio.h>
 # include <fcntl.h>
 
 # define READ_SIZE 50
@@ -77,8 +76,8 @@ typedef struct		s_maps
 	int				height;
 	int				res_height;
 	int				res_width;
-	unsigned int	floor_color;
-	unsigned int	ceiling_color;
+	unsigned int	floor_col;
+	unsigned int	ceil_col;
 	int				is_floor_color_set;
 	int				is_ceil_color_set;
 	int				*wall_lineheight;

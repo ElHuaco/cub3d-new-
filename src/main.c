@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 12:52:52 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/01 14:05:55 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/03 13:31:48 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void		init_map_params(t_maps *map)
 	map->res_height = 0;
 	map->is_ceil_color_set = 0;
 	map->is_floor_color_set = 0;
-	map->ceiling_color = 0;
-	map->floor_color = 0;
+	map->ceil_col = 0;
+	map->floor_col = 0;
 	map->side = malloc(sizeof(char *) * 5);
 	i = -1;
 	while (++i < 5)

@@ -1,0 +1,2 @@
+-Meter varios mapas y texturas.
+-Comprobar screenshot.
