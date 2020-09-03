@@ -1,4 +1,3 @@
-*.xpm
 *.o
 *.a
 *.swiftmodule
@@ -7,8 +6,7 @@
 *.dSYM
 *.swp
 *.dylib
-*.cub
 *.memgraph
-cub3d
+cub3D
 .swiftmodule
 .swiftdoc
