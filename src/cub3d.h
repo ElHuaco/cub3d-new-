@@ -6,17 +6,17 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/01 13:56:15 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/03 12:07:31 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "minilibx_opengl_20191021/mlx.h"
-# include "libft/libft.h"
-# include "libft/ft_printf.h"
-# include "libft/get_next_line.h"
+# include "../minilibx_opengl_20191021/mlx.h"
+# include "../libft/libft.h"
+# include "../libft/ft_printf.h"
+# include "../libft/get_next_line.h"
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>

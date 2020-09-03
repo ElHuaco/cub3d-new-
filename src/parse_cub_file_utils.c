@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/02 12:26:59 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/03 11:57:20 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int			set_texture_paths(t_maps *map, char *buff, int i)
 	while (buff[++i] == ' ')
 		;
 	k = i;
-	if ((buff[i] != '.') || (buff[i + 1] != '/'))
-		error_exit(EINFOT);
+/*	if ((buff[i] != '.') || (buff[i + 1] != '/'))
+		error_exit(EINFOT);*/
 	while (buff[i++] != '\n')
 		;
 	buff[i - 1] = 0;

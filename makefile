@@ -1,4 +1,4 @@
-SRCS = *.c
+SRCS = src/*.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -37,7 +37,7 @@ clean:
 			$(RM) $(OBJS)
 
 fclean:		clean
-			$(RM) $(NAME) $(LIB1) $(LIB3)
+			$(RM) $(NAME) $(LIB1) $(LIB2) $(LIB3)
 
 re:			fclean all
 
