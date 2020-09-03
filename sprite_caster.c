@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:39:48 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/02 12:29:13 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/03 11:54:36 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ static void	put_sprite_img(t_vars *v, int *l, double *p, t_imgs *im)
 					/ v->map->sprites->height;
 				dst = im[0].addr + i[1] * im[0].ll + i[0] * (im[0].bpp / 8);
 				src = im[5].addr + s[1] * im[5].ll + s[0] * (im[5].bpp / 8);
-				if (*(unsigned int *)src != 0)
-					*(unsigned int *)dst = *(unsigned int *)src;
+				*(unsigned int *)dst = (*(unsigned int *)src != 0) ?
+					*(unsigned int *)src : *(unsigned int *)dst;
 			}
 		}
 	}
@@ -136,7 +136,7 @@ void		sprite_caster_and_frame_to_win(t_vars *var, t_imgs *img)
 		put_sprite_img(var, len, proyect, img);
 	}
 	mlx_put_image_to_window(var->mlx, var->win, img[0].img, 0, 0);
+	mlx_do_sync(var->mlx);
 	if (var->must_save == 1)
 		screenshot(var, img[0]);
-	free(var->map->sprites);
 }

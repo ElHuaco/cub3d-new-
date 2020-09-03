@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 11:26:32 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/01 13:37:14 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/03 11:54:56 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,6 @@ int				ray_caster(t_vars *var)
 	}
 	sprite_caster_and_frame_to_win(var, var->img);
 	malloc_or_free_caster_param(var, "free");
+	free(var->map->sprites);
 	return (0);
 }
