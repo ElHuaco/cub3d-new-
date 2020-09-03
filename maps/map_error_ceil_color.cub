@@ -1,0 +1,17 @@
+R 1920 1080
+NO textures/column.xpm
+
+SO textures/column.xpm
+
+WE textures/column.xpm
+
+EA textures/column.xpm
+S textures/prueba.xpm
+
+F 350,150,150
+C 150,1000,150
+
+111111111111111111111111
+100000000000E000000000011
+1000000000000000000000001
+1111111111111111111111111

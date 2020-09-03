@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/03 12:21:38 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/03 12:46:13 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int			set_floor_ceil_color(t_maps *map, char *buff, int i)
 	color[1] = ft_atoi(buff + i) * 256;
 	i += digit_number(color[1] / 256, 10) + 1;
 	color[2] = ft_atoi(buff + i);
-	if ((color[0] < 0) || (color[1] < 0) || (color[2] < 0))
+	if ((color[0] < 0) || (color[1] < 0) || (color[2] < 0)
+		|| (color[0] > 255) || (color[1] > 255) || (color[2] > 255))
 		error_exit(EINFOC);
 	if (!ceil_or_floor)
 	{

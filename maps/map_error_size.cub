@@ -1,0 +1,16 @@
+R 1920 1080
+NO textures/column.xpm
+
+SO textures/column.xpm
+
+WE textures/column.xpm
+
+EA textures/column.xpm
+S textures/torch.xpm
+
+F 150,150,150
+C 150,150,150
+
+111
+1S1
+111
