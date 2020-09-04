@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:45:07 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/03 13:33:43 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/04 09:09:31 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ int			set_texture_paths(t_maps *map, char *buff, int i)
 		map->side[3] = ft_strdup(buff + k);
 	else if ((buff[j] == 'S') && (buff[j + 1] != 'O') && !(map->side[4]))
 		map->side[4] = ft_strdup(buff + k);
-	else
-		error_exit(EINFOT);
+	/*else
+		error_exit(EINFOT)*/;
 	return (i);
 }
 

@@ -1,0 +1,33 @@
+R 1920           1080
+NO textures/Final-Dungeon-Tile.xpm
+SO               textures/Final-Dungeon-Tile.xpm
+WE textures/Final-Dungeon-Tile.xpm
+
+
+
+
+
+EA textures/Final-Dungeon-Tile.xpm
+WE textures/gold_ore.xpm
+
+S textures/torch1.xpm
+F 0,0,0C      0,0,0
+
+
+
+
+
+
+
+
+
+
+
+111111
+100001
+100001                1
+101001               1 1
+110101111111111111111111
+10N000002222222222222221
+1001111111111111111111111
+111111
