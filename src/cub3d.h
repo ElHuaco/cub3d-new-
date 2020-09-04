@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:16:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/04 09:07:52 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/04 11:50:42 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define ENOTCLO "Map not enclosed by walls\n"
 # define EINFOC "Wrong information in C or F color parameters\n"
 # define EINFOR "Wrong information in window resolution\n"
-# define EINFOT "Wrong information in texture path. Must be in same folder\n"
-# define EINFO "Wrong cub file info: arrived at non-descriptive char\n"
+# define EINFOT "Wrong information in texture paths.\n"
+# define EINFO "Wrong cub file info: arrived at non-identifying char.\n"
 # define ETEXPATH "Texture file not found\n"
 # define EARG "Wrong argument use\n"
 # define EMLX "mlx init failure\n"
