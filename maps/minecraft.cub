@@ -1,4 +1,4 @@
-R 8000 8800
+R 1000 1000
 NO textures/redstone_ore.xpm
 SO textures/diamond_ore.xpm
 WE textures/emerald_ore.xpm
